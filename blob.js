@@ -5,18 +5,29 @@ function Blob(x, y, r, status, velx, vely, movement) {
 	this.vel = createVector(velx, vely);
 
 	this.update = function() {
-		if( movement == 1 )
+		this.vel.setMag(6);
+		if( movement == 1 ) {
 			this.vel = createVector(mouseX- width/2, mouseY-height/2);
-		this.vel.setMag(3);
+			this.vel.setMag(3);
+		}
+		this.inRange();
 		this.pos.add(this.vel);
 	}
 
 	this.infection = function(other) {
 		var d = p5.Vector.dist(this.pos, other.pos);
-		if (d < this.r + other.r && other.status == "Infected") {
-			return true;
-		} else {
-			return false;
+		if (d < this.r + other.r) {
+			if (other.status == "Infected")
+				this.status = "Infected"
+			this.vel.x = -this.vel.x;
+			this.vel.y = -this.vel.y;
+		}
+	}
+
+	this.inRange = function() {
+		if(this.pos.x < -width+this.r || this.pos.x > width*2-this.r || this.pos.y < -height+this.r || this.pos.y > height*2-this.r) {
+			this.vel.x = -this.vel.x;
+			this.vel.y = -this.vel.y;
 		}
 	}
 

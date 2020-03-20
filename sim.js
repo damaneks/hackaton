@@ -7,8 +7,8 @@ function setup() {
 	createCanvas(window.innerWidth, window.innerHeight);
 	for( var i = 0; i < numberOfHealthyBlobs + numberOfInfectedBlobs; i++) {
 			while (true) {
-				var x = random(10,width-10);
-				var y = random(10,height-10);
+				var x = random(20,width-20);
+				var y = random(20,height-20);
 				var j = 0;
 				var posPom = createVector(x, y);
 				for(j; j < i; j++) {
